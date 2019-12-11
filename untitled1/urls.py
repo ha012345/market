@@ -27,4 +27,7 @@ urlpatterns = [
     path('', views.login, name='login'),
     path('seller/', views.main, name='main'),
     path('buyer/', views.main2, name='main2'),
+    path('seller/write', views.write, name='write_post'),
+    path('seller/write/posting', views.posting, name='posting'),
+
 ]

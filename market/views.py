@@ -1,26 +1,10 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
 from django.contrib import auth
 from .models import UserType, Product
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 import os
 from django.conf import settings
-
-def main(request):
-    return render(request, 'main.html')
-
-def main2(request):
-    boards = Product.objects.order_by('-id')
-    page = request.GET.get('page', 1)
-    paginator = Paginator(boards, 20)
-    try:
-        lines = paginator.page(page)
-    except PageNotAnInteger:
-        lines = paginator.page(1)
-    except EmptyPage:
-        lines = paginator.page(paginator.num_pages)
-    context = {'boards': lines}
-    return render(request, 'main2.html', context)
 
 def signup(request):
     if request.method == "POST":
@@ -55,3 +39,41 @@ def login(request):
             return render(request, 'registration/login.html', {'error': 'username or password is incorrect'})
     else:
         return render(request, 'registration/login.html')
+
+
+def main(request):
+    user = get_object_or_404(User, username=request.user.username)
+    boards = user.product_set.all()
+    return render(request, 'main.html', {'boards' : boards})
+
+def main2(request):
+    boards = Product.objects.order_by('-id')
+    page = request.GET.get('page', 1)
+    paginator = Paginator(boards, 20)
+    try:
+        lines = paginator.page(page)
+    except PageNotAnInteger:
+        lines = paginator.page(1)
+    except EmptyPage:
+        lines = paginator.page(paginator.num_pages)
+    context = {'boards': lines}
+    return render(request, 'main2.html', context)
+
+
+def write(request) :
+    return render(request, 'write_post.html')
+
+def posting(request) :
+    if not request.user.is_authenticated:
+        return redirect('login')
+
+    name = request.POST['name']
+    price = request.POST['price']
+    seller_name = request.POST['seller_name']
+    place = request.POST['place']
+    type = request.POST['options']
+    phone = request.POST['phone']
+    photo = request.POST.get('photo')
+    user = User.objects.get(username=request.user.username)
+    user.product_set.create(name=name, price=price, seller_name=seller_name, place=place, type=type, photo=photo, phone=phone)
+    return redirect('main')

@@ -1,4 +1,4 @@
-{% load static %}
+﻿{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,7 +15,7 @@
   <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
 
   <!-- Custom styles for this template -->
-  <link href="{% static 'css/blog-home.css' %}" rel="stylesheet">
+  <link href="{% static 'css/shop-homepage.css' %}" rel="stylesheet">
 
 </head>
 <body>
@@ -23,14 +23,30 @@
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
-      <a class="navbar-brand" href="{% url 'main2' %}">Market</a>
+      <a class="navbar-brand" href="{% url 'main' %}">Market</a>
+        <svg style="display: none">
+  <symbol id="magnify" viewBox="0 0 18 18" height="100%" width="100%">
+    <path d="M12.5 11h-.8l-.3-.3c1-1.1 1.6-2.6 1.6-4.2C13 2.9 10.1 0          6.5 0S0 2.9 0 6.5 2.9 13 6.5 13c1.6 0 3.1-.6 4.2-1.6l.3.3v.8l5 5          1.5-1.5-5-5zm-6 0C4 11 2 9 2 6.5S4 2 6.5 2 11 4 11 6.5 9 11 6.5            11z" fill="#fff" fill-rule="evenodd"/>
+  </symbol>
+</svg>
+        <div >
+      <div class="wrapper" >
+      <div class="nav-bar">
+                     </div>
+         </div>
+         </div>
+      <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+      <script src="js/index.js"></script>
+              <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css'>
+
+</div>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="{% url 'main2' %}">Home
+            <a class="nav-link" href="#">Home
               <span class="sr-only">(current)</span>
             </a>
           </li>
@@ -54,107 +70,125 @@
   <!-- Page Content -->
   <div class="container">
 
- <div class="row">
-<div class="col-lg-3">
+    <div class="row">
+
+      <div class="col-lg-3">
 
         <h1 class="my-4">BUYER</h1>
 
-        <div class="list-group">
-          <a href="#" class="list-group-item">Category 1</a>
-            <a href="#" class="list-group-item">Category 2</a>
-            <a href="#" class="list-group-item">Category 3</a>
+          <div class="list-group">
+          <a href="" class="list-group-item">Category 1</a>
+            <a href="" class="list-group-item">Category 2</a>
+              <a href="" class="list-group-item">Category 3</a>
         </div>
 
       </div>
-      <!-- Blog Entries Column -->
+
+      <!-- /.col-lg-3 -->
+
       <div class="col-lg-9">
 
-        <h1 class="my-4">
-        </h1>
-
-        <!-- Blog Post -->
-
-        <div class="card mb-4">
-          <div class="card-body">
-            <h2 class="card-title"></h2>
-            <p class="card-text"><div id="data" class="table-responsive">
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Num.</th>
-            <th>Subject</th>
-            <th>Name</th>
-            <th>View</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for board in boards %}
-        <tr>
-
-            <td data-label="Num." width=10%>{{ board.id }}</td>
-            <td data-label="Subject" width=65%>
-                <form action="{% url 'main2' %}post={{ board.id }}" method="POST" title="{{ board.subject}}">
-                    <a href="{% url 'main2' %}post={{ board.id }}" value="{{ board.id }}">{{ board.subject }}</a>
-                </form>
-            </td>
-            <td data-label="Name" width=15%>{{ board.name }}</td>
-            <td data-label="View" width=10%>{{ board.view }}</td>
-
-        </tr>
-        {% endfor %}
-
-        </tbody>
-    </table>
-</div>
-              </p>
-          </div>
-        <ul class="pagination justify-content-center mb-4">
-        {% if boards.has_previous %}
-          <li><a href="?page={{ boards.previous_page_number }}">&laquo;</a></li>
-        {% else %}
-          <li class = "disabled"><span>&laquo;</span></li>
-        {% endif %}
-
-        {% for i in boards.paginator.page_range %}
-
-          {% if boards.number == i %}
-            <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
-          {% else %}
-            <li><a href="?page={{ i }}">{{ i }}</a></li>
-          {% endif %}
-        {% endfor %}
-
-        {% if boards.has_next %}
-            <li><a href="?page={{ boards.next_page_number }}">&raquo;</a></li>
-        {% else %}
-            <li class="disabled"><span>&raquo;</span></li>
-        {%endif %}
-        </ul>
-
-          <div class="card-footer text-muted">
-              <form action="" method="POST">
-                  {% csrf_token %}
-            <div class="input-group">
-              <input type="text" name="word" class="form-control" placeholder="Search for">
-              <span class="input-group-btn">
-                <button class="btn btn-secondary" type="submit">검색</button>
-              </span>
+        <div id="carouselExampleIndicators" class="carousel slide my-4" data-ride="carousel">
+          <ol class="carousel-indicators">
+            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+          </ol>
+          <div class="carousel-inner" role="listbox">
+            <div class="carousel-item active">
+              <img class="d-block img-fluid" src="http://placehold.it/900x350" alt="First slide">
             </div>
-              </form>
-            <a ></a>
+            <div class="carousel-item">
+              <img class="d-block img-fluid" src="http://placehold.it/900x350" alt="Second slide">
+            </div>
+            <div class="carousel-item">
+              <img class="d-block img-fluid" src="http://placehold.it/900x350" alt="Third slide">
+            </div>
           </div>
+          <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
         </div>
 
-<form action="write" method="POST">
-    {% csrf_token %}
-    <button name="write_post" value="write" class="btn btn-primary">Write Post</button>
-</form>
+        <div class="row">
 
-        <!-- Pagination -->
-          <ul class="pagination justify-content-center mb-4"></ul>
+          <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card h-100">
+              <a>
+        <img class="img-fluid rounded" name="image" src="" alt="">
+            <img class="img-fluid rounded" name="image" src="http://placehold.it/700x400" alt="">
+              </a>
+            <form action="" method="POST" title="Title">
+              <div class="card-body">
+                <h4 class="card-title">
+                  <a value="">value</a>
+                </h4>
+                <h5>value</h5>
+                <p class="card-text">by admin</p>
+              </div>
+              <div class="card-footer">
+                <small class="text-muted">
+                    <a href="" class="btn btn-primary" >Select</a>
+                </small>
+              </div>
+            </form>
+            </div>
+          </div>
+            <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card h-100">
+              <a>
+        <img class="img-fluid rounded" name="image" src="" alt="">
+            <img class="img-fluid rounded" name="image" src="http://placehold.it/700x400" alt="">
+              </a>
+            <form action="" method="POST" title="Title">
+              <div class="card-body">
+                <h4 class="card-title">
+                  <a value="">value</a>
+                </h4>
+                <h5>value</h5>
+                <p class="card-text">by admin</p>
+              </div>
+              <div class="card-footer">
+                <small class="text-muted">
+                    <a href="" class="btn btn-primary" >Select</a>
+                </small>
+              </div>
+            </form>
+            </div>
+          </div>
+            <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card h-100">
+              <a>
+        <img class="img-fluid rounded" name="image" src="" alt="">
+            <img class="img-fluid rounded" name="image" src="http://placehold.it/700x400" alt="">
+              </a>
+            <form action="" method="POST" title="Title">
+              <div class="card-body">
+                <h4 class="card-title">
+                  <a value="">value</a>
+                </h4>
+                <h5>value</h5>
+                <p class="card-text">by admin</p>
+              </div>
+              <div class="card-footer">
+                <small class="text-muted">
+                    <a href="" class="btn btn-primary" >Select</a>
+                </small>
+              </div>
+            </form>
+            </div>
+          </div>
+
+        </div>
+        <!-- /.row -->
+
       </div>
-
-
+      <!-- /.col-lg-9 -->
 
     </div>
     <!-- /.row -->
@@ -169,11 +203,9 @@
     </div>
     <!-- /.container -->
   </footer>
-
   <!-- Bootstrap core JavaScript -->
   <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
   <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
-
 </body>
 
 </html>
