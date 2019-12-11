@@ -43,8 +43,17 @@ def login(request):
 
 def main(request):
     user = get_object_or_404(User, username=request.user.username)
-    boards = user.product_set.all()
-    return render(request, 'main.html', {'boards' : boards})
+    boards = Product.objects.all().filter(seller_name=user.username)
+    page = request.GET.get('page', 1)
+    paginator = Paginator(boards, 20)
+    try:
+        lines = paginator.page(page)
+    except PageNotAnInteger:
+        lines = paginator.page(1)
+    except EmptyPage:
+        lines = paginator.page(paginator.num_pages)
+    context = {'boards': lines}
+    return render(request, 'main.html', context)
 
 def main2(request):
     boards = Product.objects.order_by('-id')
@@ -66,14 +75,12 @@ def write(request) :
 def posting(request) :
     if not request.user.is_authenticated:
         return redirect('login')
-
     name = request.POST['name']
     price = request.POST['price']
-    seller_name = request.POST['seller_name']
     place = request.POST['place']
     type = request.POST['options']
     phone = request.POST['phone']
     photo = request.FILES['photo']
     user = User.objects.get(username=request.user.username)
-    user.product_set.create(name=name, price=price, seller_name=seller_name, place=place, type=type, photo=photo, phone=phone, status='In Progress')
+    user.product_set.create(name=name, price=price, seller_name=user.username, place=place, type=type, photo=photo, phone=phone, status='In Progress')
     return redirect('main')
