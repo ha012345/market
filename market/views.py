@@ -73,7 +73,7 @@ def posting(request) :
     place = request.POST['place']
     type = request.POST['options']
     phone = request.POST['phone']
-    photo = request.POST.get('photo')
+    photo = request.FILES['photo']
     user = User.objects.get(username=request.user.username)
-    user.product_set.create(name=name, price=price, seller_name=seller_name, place=place, type=type, photo=photo, phone=phone)
+    user.product_set.create(name=name, price=price, seller_name=seller_name, place=place, type=type, photo=photo, phone=phone, status='In Progress')
     return redirect('main')
