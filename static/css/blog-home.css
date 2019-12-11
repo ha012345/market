@@ -6,3 +6,18 @@
 body {
   padding-top: 56px;
 }
+
+table#example {
+    border-collapse: collapse;
+}
+#example tr {
+    border-top: 1px solid #fff;
+}
+#example tr:hover {
+    background-color: #eee;
+}
+#example th, #example td {
+}
+#example td:hover {
+    cursor: pointer;
+}

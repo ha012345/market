@@ -29,5 +29,5 @@ urlpatterns = [
     path('buyer/', views.main2, name='main2'),
     path('seller/write', views.write, name='write_post'),
     path('seller/write/posting', views.posting, name='posting'),
-
+    path('seller/post=<int:product_id>', views.seller_product, name='seller_product'),
 ]

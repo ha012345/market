@@ -77,3 +77,12 @@ def posting(request) :
     user = User.objects.get(username=request.user.username)
     user.product_set.create(name=name, price=price, seller_name=seller_name, place=place, type=type, photo=photo, phone=phone, status='In Progress')
     return redirect('main')
+
+
+def seller_product(request, product_id) :
+    if not request.user.is_authenticated:
+        return redirect('login')
+    user = User.objects.get(username=request.user.username)
+    product = get_object_or_404(user.product_set, pk=product_id)
+    context = {'product' : product}
+    return render(request, 'product_info.html', context)
