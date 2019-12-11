@@ -135,3 +135,6 @@ def product_changing(request, product_id) :
         product.photo = photo
     product.save()
     return redirect('main')
+
+def wishlist(request) :
+    return render(request, 'wishlist.html')
