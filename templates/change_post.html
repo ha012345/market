@@ -1,0 +1,158 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Product Registration</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="{% static 'css/blog-post.css' %}" rel="stylesheet">
+    <link href="{% static 'css/post_form.css' %}" rel="stylesheet">
+
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="{% url 'main' %}">SKKU Flea Market</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="">Home
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="">menu1</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="">menu2</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="">menu3</a>
+          </li>
+            <li class="nav-item">
+            <a class="nav-link" href="">menu4</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Content -->
+  <div class="container">
+
+    <div class="row">
+        <div class="col-lg-5 row-lg-5" style="height : 100%">
+            <hr>
+            <div class="d-flex align-items-center col justify-content-center" style="margin-bottom: auto; margin-top : auto ; height:100%; width : 100%">
+                <img id="img" src="http://127.0.0.1:8000/media/{{ product.photo }}" class="image-responsive" style="width : 100%; height : auto; object-fit:contain;">
+            </div>
+            <hr>
+
+
+        </div>
+
+      <div class="col-lg-1"></div>
+      <div class="col-lg-5">
+          <form  method="POST" action="{% url 'product_changing' product.id%}" enctype="multipart/form-data" name="form" onsubmit="return check()"novalidate >
+              {% csrf_token %}
+              <hr>
+
+              <div class="form-group">
+                  <label class="control-label col-lg-6" for="name">Product Name</label>
+                  <div class="col-lg-12">
+					<input type="text" class="form-control" id="name" placeholder="" name="name" value="{{ product.name }}">
+				  </div>
+              </div>
+              <hr>
+
+              <div class="form-group">
+                  <label class="control-label col-lg-6" for="price">Price</label>
+                  <div class="col-lg-12">
+					<input type="number" class="form-control" id="price" placeholder="" name="price" value="{{product.price}}">
+				  </div>
+              </div>
+              <hr>
+
+              <div class="form-group">
+                  <label class="control-label col-lg-12" for="phone">Phone Number</label>
+                  <div class="col-lg-12">
+					<input type="text" class="form-control" id="phone" placeholder="" name="phone" value="{{product.phone}}">
+				  </div>
+              </div>
+              <hr>
+
+              <div class="form-group">
+                  <label class="control-label col-lg-12" for="place">Trading Place</label>
+                  <div class="col-lg-12">
+					<input type="text" class="form-control" id="place" placeholder="" name="place" value="{{product.place}}">
+				  </div>
+              </div>
+              <hr>
+
+              <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                  <div class="col-lg-12">
+                    <label class="btn btn-outline-dark active">
+                      {% if options.value == option1 %}
+                      <input type="radio" name="options" value="flea" id="option1" autocomplete="off" checked> Flea Market
+                    </label>
+                    <label class="btn btn-outline-dark">
+                      <input type="radio" name="options" value="auction" id="option2" autocomplete="off"> Auction
+                      {% else %}
+                      <input type="radio" name="options" value="flea" id="option1" autocomplete="off"> Flea Market
+                    </label>
+                    <label class="btn btn-outline-dark">
+                      <input type="radio" name="options" value="auction" id="option2" autocomplete="off" checked> Auction
+                      {% endif %}
+
+                    </label>
+                  </div>
+              </div>
+              <hr>
+
+
+              <div class="container" ng-controller="DemoController">
+                  <input type="file" name="photo" class="form-control" accept="image/*" id="avatar-upload" value="http://127.0.0.1:8000/media/{{ product.photo }}">
+              </div>
+              <hr>
+
+              <div class="col-lg-12">
+
+              <button id='cancel' type="button" class="btn btn-primary">Cancel</button>
+              <button type="submit"  class="btn btn-primary">Save</button>
+          </div>
+          </form>
+      </div>
+
+    </div>
+
+  </div>
+  <footer class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright &copy; Your Website 2019</p>
+    </div>
+    <!-- /.container -->
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'js/image_upload.js' %}"></script>
+</body>
+
+</html>

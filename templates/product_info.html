@@ -50,11 +50,14 @@
 
         <!-- Product Pricing -->
         <br>
-        <form class="change" action="" method="post">
-          <input type="submit" name="" value="">
-          <a id="delete" href="#" class="cart-btn">Delete this product</a>
-          <a id="can"  href="#" class="cart-btn">Modification</a>
-          <a href="#" class="cart-btn">Save</a>
+        <form class="change" action="{% url 'product_change' product.id %}" method="post">
+          {% csrf_token %}
+          <input class="cart-btn" type="submit" name="" value="Modification">
+        </form>
+
+        <form class="delete" action="{% url 'product_delete' product.id %}" method="post" onsubmit="return check()">
+          {% csrf_token %}
+          <input class="cart-btn" type="submit" name="" value="Delete this product">
         </form>
 
       </div>
@@ -62,5 +65,7 @@
     </main>
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" charset="utf-8"></script>
+    <script src="{% static 'js/product_info.js'%}" charset="utf-8"></script>
+
   </body>
 </html>

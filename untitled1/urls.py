@@ -31,4 +31,8 @@ urlpatterns = [
     path('seller/write', views.write, name='write_post'),
     path('seller/write/posting', views.posting, name='posting'),
     path('seller/post=<int:product_id>', views.seller_product, name='seller_product'),
+    path('seller/post=<int:product_id>/product_delete', views.product_delete, name='product_delete'),
+    path('seller/post=<int:product_id>/product_change', views.product_change, name='product_change'),
+    path('seller/post=<int:product_id>/product_change/product_changing', views.product_changing, name='product_changing'),
+
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
