@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tutorial</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+    <!-- CSS -->
+    <link href="{% static 'productpage.css' %}" rel="stylesheet">
+    <meta name="robots" content="noindex,follow" />
+
+  </head>
+
+  <body>
+    <main class="container">
+
+      <!-- Left Column / Product Image -->
+      <div class="left-column">
+        <img data-image="red" class="active" src="images/launchpad.jpg" alt="">
+      </div>
+
+      <!-- Right Column -->
+      <div class="right-column">
+        <!-- Product Description -->
+        <div class="product-description">
+          <span>Product type</span>
+          <h1>Product name</h1>
+          <p>Product description</p>
+        </div>
+
+        <!-- Product Configuration -->
+        <div class="product-configuration">
+
+          <!-- payment method Configuration -->
+          <div class="payment-config">
+            <span>Payment method</span>
+
+            <div class="payment-choose">
+              <button onclick="location.href='listprice.html'">List Price</button>
+              <button onclick="location.href='auction.html'">Auction</button>
+            </div>
+
+            <a href="#">Seller info</a>
+          </div>
+        </div>
+
+        <!-- Product Pricing -->
+        <br>
+        <a href="#" class="cart-btn">Add to cart</a>
+      </div>
+
+    </main>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" charset="utf-8"></script>
+  </body>
+</html>
