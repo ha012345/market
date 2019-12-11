@@ -26,7 +26,9 @@ urlpatterns = [
     path('login/', views.login, name='login'),
     path('', views.login, name='login'),
     path('seller/', views.main, name='main'),
+    path('seller/product=<int:board_id>', views.view, name='seller_view'),
     path('buyer/', views.main2, name='main2'),
+    path('buyer/product=<int:board_id>', views.view, name='buyer_view'),
     path('seller/write', views.write, name='write_post'),
     path('seller/write/posting', views.posting, name='posting'),
 

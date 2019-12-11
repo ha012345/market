@@ -30,7 +30,7 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="{% url 'main2' %}">Home
+            <a class="nav-link" href="{% url 'main' %}">Home
               <span class="sr-only">(current)</span>
             </a>
           </li>
@@ -95,8 +95,8 @@
 
             <td data-label="Num." width=5%>{{ forloop.counter }}</td>
             <td data-label="Product Name" width=25%>
-                <form action="{% url 'main2' %}post={{ board.id }}" method="POST" title="{{ board.subject}}">
-                    <a href="{% url 'main2' %}post={{ board.id }}" value="{{ board.id }}">{{ board.name }}</a>
+                <form action="{% url 'main' %}product={{ board.id }}" method="POST" title="{{ board.subject}}">
+                    <a href="{% url 'main' %}product={{ board.id }}" value="{{ board.id }}">{{ board.name }}</a>
                 </form>
             </td>
             <td data-label="Price" width=10%>{{ board.price }}</td>

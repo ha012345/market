@@ -40,7 +40,6 @@ def login(request):
     else:
         return render(request, 'registration/login.html')
 
-
 def main(request):
     user = get_object_or_404(User, username=request.user.username)
     boards = Product.objects.all().filter(seller_name=user.username)
@@ -84,3 +83,10 @@ def posting(request) :
     user = User.objects.get(username=request.user.username)
     user.product_set.create(name=name, price=price, seller_name=user.username, place=place, type=type, photo=photo, phone=phone, status='In Progress')
     return redirect('main')
+
+def view(request, board_id):
+    board = Product.objects.get(pk=board_id)
+    board.view += 1
+    board.save()
+    context = {'board': board}
+    return render(request, 'productpage.html', context)
