@@ -40,6 +40,10 @@ def login(request):
     else:
         return render(request, 'registration/login.html')
 
+def logout(request):
+    auth.logout(request)
+    return redirect('login')
+
 
 def main(request):
     user = get_object_or_404(User, username=request.user.username)
