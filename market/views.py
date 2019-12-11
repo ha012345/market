@@ -85,4 +85,6 @@ def seller_product(request, product_id) :
     user = User.objects.get(username=request.user.username)
     product = get_object_or_404(user.product_set, pk=product_id)
     context = {'product' : product}
+
+
     return render(request, 'product_info.html', context)

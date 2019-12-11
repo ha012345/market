@@ -18,10 +18,16 @@ html, body {
 
 /* Columns */
 .left-column {
-  width: 65%;
+  width: 55%;
   position: relative;
+  text-align: center;
+  margin-top: 60px;
+
 }
 
+.middle-column {
+  width : 10%;
+}
 .right-column {
   width: 35%;
   margin-top: 60px;
@@ -30,16 +36,13 @@ html, body {
 
 /* Left Column */
 .left-column img {
-  width: 100%;
-  position: absolute;
-  left: 0;
-  top: 0;
-  opacity: 0;
-  transition: all 0.3s ease;
+  width:auto;
+  height:100%;
 }
 
 .left-column img.active {
   opacity: 1;
+
 }
 
 

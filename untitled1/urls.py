@@ -30,4 +30,4 @@ urlpatterns = [
     path('seller/write', views.write, name='write_post'),
     path('seller/write/posting', views.posting, name='posting'),
     path('seller/post=<int:product_id>', views.seller_product, name='seller_product'),
-]
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
