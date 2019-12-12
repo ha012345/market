@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
 from django.contrib import auth
-from .models import UserType, Product
+from .models import UserType, Product, History, Wish
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 import os
 from django.conf import settings
@@ -56,6 +56,7 @@ def main(request):
         lines = paginator.page(1)
     except EmptyPage:
         lines = paginator.page(paginator.num_pages)
+
     context = {'boards': lines}
     return render(request, 'main.html', context)
 
