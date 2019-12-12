@@ -77,7 +77,7 @@
           <div class="card-body">
             <h2 class="card-title"></h2>
             <p class="card-text"><div id="data" class="table-responsive">
-    <table class="table">
+    <table id="example" class="table">
         <thead>
         <tr>
             <th>Num.</th>
@@ -95,8 +95,8 @@
 
             <td data-label="Num." width=5%>{{ forloop.counter }}</td>
             <td data-label="Product Name" width=25%>
-                <form action="{% url 'main' %}product={{ board.id }}" method="POST" title="{{ board.subject}}">
-                    <a href="{% url 'main' %}product={{ board.id }}" value="{{ board.id }}">{{ board.name }}</a>
+                <form action="{% url 'main' %}post={{ board.id }}" method="POST" title="{{ board.subject}}">
+                    <a href="{% url 'main' %}post={{ board.id }}" value="{{ board.id }}">{{ board.name }}</a>
                 </form>
             </td>
             <td data-label="Price" width=10%>{{ board.price }}</td>
@@ -177,7 +177,7 @@
   <!-- Bootstrap core JavaScript -->
   <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
   <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
-
+  <script src="{% static 'js/main.js' %}"></script>
 </body>
 
 </html>

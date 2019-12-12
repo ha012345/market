@@ -116,6 +116,15 @@
 
         <p>{{ board.content }}</p>
       <hr>
+      <form class="change" action="{% url 'product_change' board.id %}" method="post">
+          {% csrf_token %}
+          <input class="btn btn-primary" type="submit" name="" value="Modification">
+        </form>
+
+        <form class="delete" action="{% url 'product_delete' board.id %}" method="post" onsubmit="return check()">
+          {% csrf_token %}
+          <input class="btn btn-primary" type="submit" name="" value="Delete this product">
+        </form>
       </div>
     <div class="card my-4">
 

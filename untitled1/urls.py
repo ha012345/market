@@ -26,10 +26,15 @@ urlpatterns = [
     path('login/', views.login, name='login'),
     path('', views.login, name='login'),
     path('seller/', views.main, name='main'),
-    path('seller/product=<int:board_id>', views.view, name='seller_view'),
+    #path('seller/product=<int:board_id>', views.view, name='seller_view'),
     path('buyer/', views.main2, name='main2'),
-    path('buyer/product=<int:board_id>', views.view, name='buyer_view'),
+    path('buyer/post=<int:product_id>', views.seller_product, name='buyer_product'),
+    path('buyer/wishlist', views.wishlist, name='wishlist'),
     path('seller/write', views.write, name='write_post'),
     path('seller/write/posting', views.posting, name='posting'),
-
+    path('seller/post=<int:product_id>', views.seller_product, name='seller_product'),
+    path('seller/post=<int:product_id>/product_delete', views.product_delete, name='product_delete'),
+    path('seller/post=<int:product_id>/product_change', views.product_change, name='product_change'),
+    path('seller/post=<int:product_id>/product_change/product_changing', views.product_changing,
+         name='product_changing'),
 ]

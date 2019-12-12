@@ -19,3 +19,14 @@ class Product(models.Model):
     seller = models.ForeignKey(User, on_delete=models.CASCADE) #판매자 정보
     status = models.CharField(max_length=20)    # 판매중인지 종료인지
     photo = models.ImageField(blank=True)
+
+class Wish(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)  # 위시리스트 해놓은 사람 정보
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)  # 위시리스트 한 상품
+
+
+class History(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)  # 거래 한 사람 정보
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)  # 거래 한 상품
+    price = models.IntegerField(default=0)  # 거래 한 가격 또는 auction bid
+    status = models.CharField(max_length=20)  # 거래가 성공해서 샀는지, 진행중인지 실패했는지 등

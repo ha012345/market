@@ -47,3 +47,7 @@ function check() {
 
   else return true;
 }
+
+$('#cancel').click( function() {
+  window.history.back();
+});

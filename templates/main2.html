@@ -51,7 +51,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="">menu1</a>
+            <a class="nav-link" href="wishlist">Wishlist</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="">menu2</a>
@@ -124,7 +124,7 @@
             <form action="" method="POST" title="Title">
               <div class="card-body">
                 <h4 class="card-title">
-                  <a href="{% url 'main2' %}product={{ board.id }}" value="{{ board.id }}">{{ board.name }}</a>
+                  <a href="{% url 'main2' %}post={{ board.id }}" value="{{ board.id }}">{{ board.name }}</a>
                 </h4>
                 <h5>{{board.price}}</h5>
                   <h5>{{board.status}}</h5>
