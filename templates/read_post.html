@@ -1,0 +1,147 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Market</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <!-- Custom styles for this template -->
+  <link href="{% static 'css/blog-post.css' %}" rel="stylesheet">
+
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="">Market</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="">Home
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="">menu1</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="">menu2</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="">menu3</a>
+          </li>
+            <li class="nav-item">
+            <a class="nav-link" href="">menu4</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Content -->
+  <div class="container">
+
+    <div class="row">
+        <div class="col-lg-3">
+
+        <h1 class="my-4">Market</h1>
+
+        <div class="list-group">
+          <a href="#" class="list-group-item">Flea Market</a>
+            <a href="#" class="list-group-item">Auction</a>
+        </div>
+
+      </div>
+
+      <!-- Post Content Column -->
+      <div class="col-lg-8">
+
+        <!-- Title -->
+        <h1 class="mt-4">{{ board.name }}</h1>
+
+        <!-- Author -->
+        <p class="lead">
+          by
+          <a>{{ board.seller_name }}</a>
+        </p>
+
+        <hr>
+
+        <!-- Date/Time -->
+        <p>Posted on {{ board.created_date }}</p>
+
+        <hr>
+      <p class="lead">
+          PRICE :
+          <a>{{ board.price }}</a>
+        </p>
+
+        <hr>
+      <p class="lead">
+          PHONE :
+          <a>{{ board.phone }}</a>
+        </p>
+
+        <hr>
+      <p class="lead">
+          PLACE :
+          <a>{{ board.place }}</a>
+        </p>
+
+        <hr>
+
+    {% if board.photo %}
+        <!-- Preview Image -->
+        <img class="img-fluid rounded" name="image" src="{{ board.photo.url }}" alt="">
+            {% else %}
+            <img class="img-fluid rounded" name="image" src="http://placehold.it/900x300" alt="">
+      {% endif %}
+        <hr>
+
+        <!-- Post Content -->
+        <p class="lead"></p>
+
+        <p>{{ board.content }}</p>
+      <hr>
+      </div>
+    <div class="card my-4">
+
+        </div>
+<!-- Sidebar Widgets Column -->
+
+    </div>
+
+      <!-- Sidebar Widgets Column -->
+    <!-- /.row -->
+
+  </div>
+  <!-- /.container -->
+
+  <!-- Footer -->
+  <footer class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright &copy; Your Website 2019</p>
+    </div>
+    <!-- /.container -->
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+</body>
+
+</html>

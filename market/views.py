@@ -80,8 +80,9 @@ def posting(request) :
     type = request.POST['options']
     phone = request.POST['phone']
     photo = request.FILES['photo']
+    content = request.POST['content']
     user = User.objects.get(username=request.user.username)
-    user.product_set.create(name=name, price=price, seller_name=user.username, place=place, type=type, photo=photo, phone=phone, status='In Progress')
+    user.product_set.create(name=name, price=price, seller_name=user.username, place=place, type=type, photo=photo, phone=phone, status='In Progress', content=content)
     return redirect('main')
 
 def view(request, board_id):
@@ -89,4 +90,4 @@ def view(request, board_id):
     board.view += 1
     board.save()
     context = {'board': board}
-    return render(request, 'productpage.html', context)
+    return render(request, 'read_post.html', context)
