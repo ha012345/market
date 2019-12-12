@@ -137,4 +137,9 @@ def product_changing(request, product_id) :
     return redirect('main')
 
 def wishlist(request) :
-    return render(request, 'wishlist.html')
+    if not request.user.is_authenticated:
+        return redirect('login')
+    user = User.objects.get(username=request.user.username)
+    boards = user.wish_set.all()
+    context = {'boards' : boards}
+    return render(request, 'wishlist.html', context)
