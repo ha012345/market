@@ -24,6 +24,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('signup/', views.signup, name='signup'),
     path('login/', views.login, name='login'),
+    path('logout/', views.logout, name='logout'),
     path('', views.login, name='login'),
     path('seller/', views.main, name='main'),
     #path('seller/product=<int:board_id>', views.view, name='seller_view'),
@@ -37,4 +38,4 @@ urlpatterns = [
     path('seller/post=<int:product_id>/product_change', views.product_change, name='product_change'),
     path('seller/post=<int:product_id>/product_change/product_changing', views.product_changing,
          name='product_changing'),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
