@@ -31,6 +31,7 @@ urlpatterns = [
     path('buyer/', views.main2, name='main2'),
     path('buyer/post=<int:product_id>', views.seller_product, name='buyer_product'),
     path('buyer/wishlist', views.wishlist, name='wishlist'),
+    path('buyer/shoppinglist', views.shoppinglist, name='shoppinglist'),
     path('seller/write', views.write, name='write_post'),
     path('seller/write/posting', views.posting, name='posting'),
     path('seller/post=<int:product_id>', views.seller_product, name='seller_product'),

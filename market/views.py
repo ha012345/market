@@ -158,3 +158,19 @@ def wishlist(request) :
         lines = paginator.page(paginator.num_pages)
     context = {'boards': lines}
     return render(request, 'wishlist.html', context)
+
+def shoppinglist(request) :
+    if not request.user.is_authenticated:
+        return redirect('login')
+    user = User.objects.get(username=request.user.username)
+    boards = user.wish_set.all()
+    page = request.GET.get('page', 1)
+    paginator = Paginator(boards, 20)
+    try:
+        lines = paginator.page(page)
+    except PageNotAnInteger:
+        lines = paginator.page(1)
+    except EmptyPage:
+        lines = paginator.page(paginator.num_pages)
+    context = {'boards': lines}
+    return render(request, 'wishlist.html', context)
