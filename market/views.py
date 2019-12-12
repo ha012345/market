@@ -100,3 +100,42 @@ def seller_product(request, product_id) :
 
 
     return render(request, 'product_info.html', context)
+
+def product_delete(request, product_id) :
+    if not request.user.is_authenticated:
+        return redirect('login')
+    user = User.objects.get(username=request.user.username)
+    product = get_object_or_404(user.product_set, pk=product_id)
+    product.delete()
+
+    return redirect('main')
+
+
+def product_change(request, product_id) :
+    if not request.user.is_authenticated:
+        return redirect('login')
+    user = User.objects.get(username=request.user.username)
+    product = get_object_or_404(user.product_set, pk=product_id)
+    context = {'product' : product}
+    return render(request, 'change_post.html', context)
+
+def product_changing(request, product_id) :
+    if not request.user.is_authenticated:
+        return redirect('login')
+
+    user = User.objects.get(username=request.user.username)
+    product = user.product_set.get(pk = product_id)
+
+    product.name = request.POST['name']
+    product.price = request.POST['price']
+    product.place = request.POST['place']
+    product.type = request.POST['options']
+    product.phone = request.POST['phone']
+    photo = request.FILES.get('photo', False)
+    if photo != False :
+        product.photo = photo
+    product.save()
+    return redirect('main')
+
+def wishlist(request) :
+    return render(request, 'wishlist.html')
