@@ -108,6 +108,7 @@
 
         <div class="row">
 {% for board in boards %}
+{% if board.status != 'Bought' %}
           <div class="col-lg-4 col-md-6 mb-4">
             <div class="card h-100">
               <a>
@@ -128,13 +129,15 @@
               </div>
               <div class="card-footer">
                 <small class="text-muted">
-                    <a href="" class="btn btn-primary" >Select</a>
+                    <a href="{% url 'main2' %}post={{ board.id }}" class="btn btn-primary" >Select</a>
                 </small>
               </div>
             </form>
             </div>
           </div>
+{% endif %}
 {% endfor %}
+
         </div>
         <!-- /.row -->
 

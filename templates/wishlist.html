@@ -143,8 +143,9 @@
 						<div class="col-xs-6">
               <div class="col-xs-5">
                 <h4 style="color : green;" class="product-name">{{board.product.status}}</h4>
+                {% if board.product.type == 'auction' %}
                 <h4 style="color : gray;" class="product-name time" >{{board.product.created_date | date:'Y-m-d H:i'}}</h4>
-
+                {% endif %}
               </div>
 
 							<div class="col-xs-5 text-right">

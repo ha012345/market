@@ -5,6 +5,7 @@ from .models import UserType, Product
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 import os
 from django.conf import settings
+from datetime import datetime, timedelta, timezone
 
 def signup(request):
     if request.method == "POST":
@@ -45,8 +46,20 @@ def logout(request):
     return redirect('login')
 
 def main(request):
+    auctions = Product.objects.all().filter(type = 'auction')
+    time2 =  datetime.now(timezone.utc)
+    for auction in auctions :
+        time1= auction.created_date
+        if (time2 -time1).days >= 1 :
+            auction.status = 'Bought'
+            auction.save()
+            history = auction.history_set.all().filter(price = auction.price)
+            for histor in history :
+                histor.status = 'Bought'
+                histor.save()
+
     user = get_object_or_404(User, username=request.user.username)
-    boards = Product.objects.all().filter(seller_name=user.username)
+    boards = Product.objects.all().filter(seller_name=user.username, status = "In Progress")
     page = request.GET.get('page', 1)
     paginator = Paginator(boards, 20)
     try:
@@ -59,6 +72,18 @@ def main(request):
     return render(request, 'main.html', context)
 
 def main2(request):
+    auctions = Product.objects.all().filter(type = 'auction')
+    time2 =  datetime.now(timezone.utc)
+    for auction in auctions :
+        time1= auction.created_date
+        if (time2 -time1).days >= 1 :
+            auction.status = 'Bought'
+            auction.save()
+            history = auction.history_set.all().filter(price = auction.price)
+            for histor in history :
+                histor.status = 'Bought'
+                histor.save()
+
     boards = Product.objects.order_by('-id')
     page = request.GET.get('page', 1)
     paginator = Paginator(boards, 20)
@@ -95,6 +120,31 @@ def posting(request) :
 #    board.save()
 #    context = {'board': board}
 #    return render(request, 'read_post.html', context)
+
+def buyer_product(request, product_id) :
+    if not request.user.is_authenticated:
+        return redirect('login')
+    product = get_object_or_404(Product, pk=product_id)
+    context = {'board' : product}
+    return render(request, 'read_post2.html', context)
+
+def buy(request, product_id) :
+    print(product_id)
+    if not request.user.is_authenticated:
+        return redirect('login')
+    user = User.objects.get(username=request.user.username)
+    product = Product.objects.get(pk=product_id)
+    if not product.history_set.filter(status = 'Bought') :
+        if product.type == 'flea' :
+            product.history_set.create(user = user, product = product, price = product.price, status='Bought')
+            product.status = 'Bought'
+            product.save()
+        elif product.type == 'auction' :
+            product.history_set.create(user = user, product = product, price = request.POST['bid'], status='In Progress')
+            product.price = request.POST['bid']
+            product.save()
+
+    return redirect('main2')
 
 def seller_product(request, product_id) :
     if not request.user.is_authenticated:
@@ -159,6 +209,17 @@ def wishlist(request) :
     context = {'boards': lines}
     return render(request, 'wishlist.html', context)
 
+def wish_add(request, product_id) :
+    if not request.user.is_authenticated:
+        return redirect('login')
+    user = User.objects.get(username=request.user.username)
+    product = Product.objects.get(pk = product_id)
+
+    if not user.wish_set.filter(user = user, product=product) :
+        user.wish_set.create(user = user, product= product)
+    return redirect('buyer_product', product_id)
+
+
 def wish_erase(request, product_id) :
     if not request.user.is_authenticated:
         return redirect('login')
@@ -170,10 +231,22 @@ def wish_erase(request, product_id) :
 
 
 def shoppinglist(request) :
+    auctions = Product.objects.all().filter(type = 'auction')
+    time2 =  datetime.now(timezone.utc)
+    for auction in auctions :
+        time1= auction.created_date
+        if (time2 -time1).days >= 1 :
+            auction.status = 'Bought'
+            auction.save()
+            history = auction.history_set.all().filter(price = auction.price)
+            for histor in history :
+                histor.status = 'Bought'
+                histor.save()
+
     if not request.user.is_authenticated:
         return redirect('login')
     user = User.objects.get(username=request.user.username)
-    boards = user.history_set.filter(status = 'bought')
+    boards = user.history_set.filter(status = 'Bought')
 
     page = request.GET.get('page', 1)
     paginator = Paginator(boards, 20)
