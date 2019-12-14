@@ -123,10 +123,10 @@
 							<div class="col-xs-6">
 								<h5><span class="glyphicon glyphicon-heart"></span> <strong>Wish List</strong></h5>
 							</div>
-							<div class="col-xs-6">
+							<div class="col-xs-6"><a href="{% url 'main2' %}">
 								<button type="button" class="btn btn-primary btn-sm btn-block">
 									<span class="glyphicon glyphicon-share-alt"></span> Continue Shopping
-								</button>
+								</button></a>
 							</div>
 						</div>
 					</div>
@@ -151,9 +151,9 @@
 								<h3><strong>{{board.product.price}}<span class="text-muted">원</span></strong></h3>
 							</div>
 							<div class="col-xs-2" style="text-align : center;">
-								<button type="button" class="btn btn-link btn-xs">
-									<span style="line-height : 60px; font-size : 15px;" class="glyphicon glyphicon-trash"> </span>
-								</button>
+                  <button type="button" class="btn btn-link btn-xs"><a href="{% url 'wishlist' %}/erase={{ board.product.id }}">
+                    <span style="line-height : 60px; font-size : 15px;" class="glyphicon glyphicon-trash" id = "erase"> </span></a>
+                  </button>
 							</div>
 						</div>
 					</div>

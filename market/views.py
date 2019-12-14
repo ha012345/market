@@ -159,11 +159,22 @@ def wishlist(request) :
     context = {'boards': lines}
     return render(request, 'wishlist.html', context)
 
+def wish_erase(request, product_id) :
+    if not request.user.is_authenticated:
+        return redirect('login')
+    user = User.objects.get(username=request.user.username)
+    product = Product.objects.get(pk = product_id)
+    wish = get_object_or_404(user.wish_set, product=product)
+    wish.delete()
+    return redirect('wishlist')
+
+
 def shoppinglist(request) :
     if not request.user.is_authenticated:
         return redirect('login')
     user = User.objects.get(username=request.user.username)
-    boards = user.wish_set.all()
+    boards = user.history_set.filter(status = 'bought')
+
     page = request.GET.get('page', 1)
     paginator = Paginator(boards, 20)
     try:
@@ -172,5 +183,9 @@ def shoppinglist(request) :
         lines = paginator.page(1)
     except EmptyPage:
         lines = paginator.page(paginator.num_pages)
-    context = {'boards': lines}
-    return render(request, 'wishlist.html', context)
+    sum = 0;
+    for board in boards :
+        sum += board.product.price
+
+    context = {'boards': lines, 'sum' : sum,}
+    return render(request, 'shoppinglist.html', context)
