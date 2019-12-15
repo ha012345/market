@@ -14,7 +14,7 @@
     <form method="POST" action="{% url 'signup' %}" class="form1" align="center">
         {% csrf_token %}
       <input class="first" name="username" type="text" placeholder="Full Name" required autofocus>
-      <input class="mail" name="mail" type="email" placeholder="Email Address" required>
+      <input class="mail" name="student_id" type="text" placeholder="Student ID" required>
       <input class="pass1" name="password1" type="password" placeholder="Choose Password" required>
       <input class="pass2"name="password2" type="password" placeholder="Retype Password" required>
     <div class="container">

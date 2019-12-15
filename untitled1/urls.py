@@ -29,6 +29,7 @@ urlpatterns = [
     path('seller/', views.main, name='main'),
     #path('seller/product=<int:board_id>', views.view, name='seller_view'),
     path('buyer/', views.main2, name='main2'),
+    path('administrator/', views.main3, name='main3'),
     path('buyer/post=<int:product_id>', views.buyer_product, name='buyer_product'),
     path('buyer/post=<int:product_id>/buy', views.buy, name='buy'),
     path('buyer/wishlist', views.wishlist, name='wishlist'),

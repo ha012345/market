@@ -23,14 +23,14 @@
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
-      <a class="navbar-brand" href="{% url 'main' %}">Market</a>
+      <a class="navbar-brand" href="{% url 'main3' %}">Market</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="{% url 'main' %}">Home
+            <a class="nav-link" href="{% url 'main3' %}">Home
               <span class="sr-only">(current)</span>
             </a>
           </li>
@@ -57,7 +57,7 @@
  <div class="row">
 <div class="col-lg-3">
 
-        <h1 class="my-4">SELLER</h1>
+        <h1 class="my-4">ADMIN</h1>
 
         <div class="list-group">
           <a href="#" class="list-group-item">Flea Market</a>
@@ -80,12 +80,10 @@
     <table id="example" class="table">
         <thead>
         <tr>
-            <th>Num.</th>
-            <th>Product Name</th>
-            <th>Price</th>
-            <th>Wish list person</th>
-            <th>Status</th>
-            <th>History</th>
+            <th>StudentID</th>
+            <th>Name</th>
+            <th>Password</th>
+            <th>Classification</th>
 
         </tr>
         </thead>
@@ -93,16 +91,14 @@
         {% for board in boards %}
         <tr>
 
-            <td data-label="Num." width=5%>{{ forloop.counter }}</td>
-            <td data-label="Product Name" width=25%>
-                <form action="{% url 'main' %}post={{ board.id }}" method="POST" title="{{ board.subject}}">
-                    <a href="{% url 'main' %}post={{ board.id }}" value="{{ board.id }}">{{ board.name }}</a>
+            <td data-label="StudentID" width=25%>{{ board.info.student_id }}</td>
+            <td data-label="Name" width=25%>
+                <form action="{% url 'main3' %}member={{ board.id }}" method="POST" title="{{ board.username}}">
+                    <a href="{% url 'main3' %}member={{ board.id }}" value="{{ board.id }}">{{ board.username }}</a>
                 </form>
             </td>
-            <td data-label="Price" width=10%>{{ board.price }}</td>
-            <td data-label="Wish" width=20%>{{ board.view }}</td>
-            <td data-label="Status" width=15%>{{ board.status }}</td>
-            <td data-label="History" width=25%>{{ board.view }}</td>
+            <td data-label="Password" width=25%>{{ board.info.password }}</td>
+            <td data-label="Classification" width=10%>{{ board.type.type }}</td>
 
         </tr>
         {% endfor %}
@@ -149,10 +145,6 @@
           </div>
         </div>
 
-<form action="write" method="POST">
-    {% csrf_token %}
-    <button name="write_post" value="write" class="btn btn-primary">Product Registration</button>
-</form>
 
         <!-- Pagination -->
           <ul class="pagination justify-content-center mb-4"></ul>

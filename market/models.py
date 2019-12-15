@@ -2,8 +2,13 @@ from django.db import models
 from django.contrib.auth.models import User
 
 class UserType (models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='type')
     type = models.CharField(max_length=20)
+
+class UserInfo (models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='info')
+    student_id = models.CharField(max_length=20)
+    pw = models.CharField(max_length=50)
 
 class Product(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)

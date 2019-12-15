@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
 from django.contrib import auth
-from .models import UserType, Product
+from .models import UserType, Product, UserInfo
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 import os
 from django.conf import settings
@@ -15,6 +15,10 @@ def signup(request):
             usertype = request.POST.get("usertype", None)
             type = UserType(user=user, type=usertype)
             type.save()
+            userInfo = request.POST.get("student_id", None)
+            pw = request.POST.get("password1", None)
+            info = UserInfo(user=user, student_id=userInfo, pw=pw)
+            info.save()
             auth.login(request, user)
             if (UserType.objects.get(user=user).type == "seller"):
                 return redirect('main')
@@ -96,6 +100,18 @@ def main2(request):
     context = {'boards': lines}
     return render(request, 'main2.html', context)
 
+def main3(request):
+    users = User.objects.all()
+    page = request.GET.get('page', 1)
+    paginator = Paginator(users, 20)
+    try:
+        lines = paginator.page(page)
+    except PageNotAnInteger:
+        lines = paginator.page(1)
+    except EmptyPage:
+        lines = paginator.page(paginator.num_pages)
+    context = {'boards': lines}
+    return render(request, 'main3.html', context)
 
 def write(request) :
     return render(request, 'write_post.html')
