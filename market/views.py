@@ -262,3 +262,33 @@ def shoppinglist(request) :
 
     context = {'boards': lines, 'sum' : sum,}
     return render(request, 'shoppinglist.html', context)
+
+def search_product(request):
+    all_product = Product.objects.all()
+    result = []
+    seller_name = request.POST["seller_name"]
+    product_name = request.POST["product_name"]
+    if request.POST["max"] == '':
+        max = 1000000000
+    else:
+        max = int(request.POST["max"])
+    if request.POST["min"] == '':
+        min = 0
+    else:
+        min = int(request.POST["min"])
+    print(max)
+    print(min)
+    for object in all_product.filter(seller_name__contains=seller_name, name__contains=product_name):
+        if(min <= object.price <= max):
+            result.append(object)
+    result.sort(key=lambda object : object.id)
+    page = request.GET.get('page', 1)
+    paginator = Paginator(result, 8)
+    try:
+        lines = paginator.page(page)
+    except PageNotAnInteger:
+        lines = paginator.page(1)
+    except EmptyPage:
+        lines = paginator.page(paginator.num_pages)
+    context = {'boards': lines}
+    return render(request, 'main2.html', context)

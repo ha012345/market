@@ -60,53 +60,10 @@
 
     <!-- Page Features -->
     <div class="row text-center">
-{% for board in boards %}
-      <div class="col-lg-3 col-md-6 mb-4">
-        <div class="card h-100">
-            {% if board.photo %}
-        <img class="img-fluid rounded" name="image" src="{{ board.photo.url }}" alt="">
-            {% else %}
-            <img class="img-fluid rounded" name="image" src="http://placehold.it/500x325" alt="">
-      {% endif %}
-          <div class="card-body">
-            <h4 class="card-title">{{board.name}}</h4>
-            <p class="card-text">by {{ board.seller_name}}</p>
-              <p class="card-text">{{ board.price }}원</p>
-              <p class="card-text">{{ board.status }}</p>
-          </div>
-          <div class="card-footer">
-              <form action="" method="POST" title="{{ board.name}}">
-                  <a href="" value="{{ board.id }}" class="btn btn-primary" >Buy</a>
-              </form>
-          </div>
-        </div>
-      </div>
-        {% endfor %}
 
     </div>
     <!-- /.row -->
-<ul class="pagination justify-content-center mb-4">
-        {% if boards.has_previous %}
-          <li><a href="?page={{ boards.previous_page_number }}">&laquo;</a></li>
-        {% else %}
-          <li class = "disabled"><span>&laquo;</span></li>
-        {% endif %}
 
-        {% for i in boards.paginator.page_range %}
-
-          {% if boards.number == i %}
-            <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
-          {% else %}
-            <li><a href="?page={{ i }}">{{ i }}</a></li>
-          {% endif %}
-        {% endfor %}
-
-        {% if boards.has_next %}
-            <li><a href="?page={{ boards.next_page_number }}">&raquo;</a></li>
-        {% else %}
-            <li class="disabled"><span>&raquo;</span></li>
-        {%endif %}
-        </ul>
   </div>
   <!-- /.container -->
   <div class="container">
@@ -163,7 +120,29 @@
 					<div class="row text-center">
 						<div class="col-xs-11">
 							<h4 class="text-right">Total <strong>{{sum}}원</strong></h4>
-						</div>
+						<ul class="pagination justify-content-center mb-4">
+        {% if boards.has_previous %}
+          <li><a href="?page={{ boards.previous_page_number }}">&laquo;</a></li>
+        {% else %}
+          <li class = "disabled"><span>&laquo;</span></li>
+        {% endif %}
+
+        {% for i in boards.paginator.page_range %}
+
+          {% if boards.number == i %}
+            <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+          {% else %}
+            <li><a href="?page={{ i }}">{{ i }}</a></li>
+          {% endif %}
+        {% endfor %}
+
+        {% if boards.has_next %}
+            <li><a href="?page={{ boards.next_page_number }}">&raquo;</a></li>
+        {% else %}
+            <li class="disabled"><span>&raquo;</span></li>
+        {%endif %}
+        </ul>
+                        </div>
 					</div>
 				</div>
 			</div>
