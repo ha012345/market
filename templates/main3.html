@@ -84,6 +84,7 @@
             <th>Name</th>
             <th>Password</th>
             <th>Classification</th>
+            <th>Mod/Del</th>
 
         </tr>
         </thead>
@@ -92,13 +93,23 @@
         <tr>
 
             <td data-label="StudentID" width=25%>{{ board.info.student_id }}</td>
-            <td data-label="Name" width=25%>
+            <td data-label="Name" width=20%>
                 <form action="{% url 'main3' %}member={{ board.id }}" method="POST" title="{{ board.username}}">
                     <a href="{% url 'main3' %}member={{ board.id }}" value="{{ board.id }}">{{ board.username }}</a>
                 </form>
             </td>
-            <td data-label="Password" width=25%>{{ board.info.password }}</td>
+            <td data-label="Password" width=20%>{{ board.info.pw }}</td>
             <td data-label="Classification" width=10%>{{ board.type.type }}</td>
+        <td data-label="Mod/Del" width=25%>
+            <form class="change" action="{% url 'member_mod' board.id %}" method="post" style="float: left;">
+          {% csrf_token %}
+          <input class="btn btn-primary" type="submit" name="" value="Mod">
+        </form>
+            <form class="delete" action="{% url 'member_del' board.id %}" method="post" style="float: right;">
+          {% csrf_token %}
+          <input class="btn btn-primary" type="submit" name="" value="Del">
+        </form>
+        </td>
 
         </tr>
         {% endfor %}

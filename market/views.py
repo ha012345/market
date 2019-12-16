@@ -292,8 +292,6 @@ def search_product(request):
         min = 0
     else:
         min = int(request.POST["min"])
-    print(max)
-    print(min)
     for object in all_product.filter(seller_name__contains=seller_name, name__contains=product_name):
         if(min <= object.price <= max):
             result.append(object)
@@ -308,3 +306,31 @@ def search_product(request):
         lines = paginator.page(paginator.num_pages)
     context = {'boards': lines}
     return render(request, 'main2.html', context)
+
+def member_mod(request, member_id):
+    user = User.objects.get(pk=member_id)
+    context = {'member' : user}
+    return render (request, 'modification.html', context)
+
+def member_mod_1 (request, member_id):
+    user = User.objects.get(pk=member_id)
+    type = UserType.objects.get(user=user)
+    info = UserInfo.objects.get(user=user)
+    user.username = request.POST['username']
+    user.password = request.POST['pw']
+    user.save()
+    type.type = request.POST['options']
+    type.save()
+    info.student_id = request.POST['student_id']
+    info.pw = request.POST['pw']
+    info.save()
+    return redirect('main3')
+
+def member_del(request, member_id):
+    user = User.objects.get(pk=member_id)
+    type = UserType.objects.get(user=user)
+    info = UserInfo.objects.get(user=user)
+    info.delete()
+    type.delete()
+    user.delete()
+    return redirect('main3')

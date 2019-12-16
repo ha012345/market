@@ -1,0 +1,157 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Modification</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="{% static 'css/blog-post.css' %}" rel="stylesheet">
+    <link href="{% static 'css/post_form.css' %}" rel="stylesheet">
+
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="{% url 'main3' %}">SKKU Flea Market</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="{% url 'main3' %}">Home
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="">menu1</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="">menu2</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="">menu3</a>
+          </li>
+            <li class="nav-item">
+            <a class="nav-link" href="/logout">Logout</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Content -->
+    <!-- Page Content -->
+  <div class="container">
+
+    <div class="row">
+        <div class="col-lg-3">
+
+        <h1 class="my-4">ADMIN</h1>
+
+        <div class="list-group">
+          <a href="#" class="list-group-item">Category 1</a>
+        </div>
+
+      </div>
+
+      <!-- Post Content Column -->
+      <div class="col-lg-8">
+
+          <form  method="POST" action="{% url 'member_mod_1' member.id %}" enctype="multipart/form-data" novalidate>
+              {% csrf_token %}
+          <h1 class="mt-4">
+              <hr>
+      <div class="post-title">
+        <input type="text" name="username" id="post-title" class="post-input large" value="{{ member.username }}"  placeholder="Member Name"/>
+      </div>
+          </h1>
+          <hr>
+
+        <!-- Post Content -->
+              <p class="lead">
+          <a>
+              <div class="post-content">
+          <input type="text" name="student_id" class="post-input" value="{{member.info.student_id}}" placeholder="Member StudentID"/>
+      </div>
+          </a>
+        </p>
+          <hr>
+              <p class="lead">
+          <a>
+              <div class="post-content">
+          <input type="text" name="pw" class="post-input" value="{{member.info.pw}}" placeholder="Member Password"/>
+      </div>
+          </a>
+        </p>
+
+        <hr>
+              <div class="col-lg-5 row-lg-5" style="height : 100%">
+
+        </div>
+              <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                  <div class="col-lg-12">
+                    <label class="btn btn-outline-dark active">
+                      {% if member.type.type == 'seller' %}
+                      <input type="radio" name="options" value="seller" id="seller" autocomplete="off" checked> Seller
+                    </label>
+                    <label class="btn btn-outline-dark">
+                      <input type="radio" name="options" value="buyer" id="buyer" autocomplete="off"> Buyer
+                      {% else %}
+                      <input type="radio" name="options" value="seller" id="seller" autocomplete="off"> Seller
+                    </label>
+                    <label class="btn btn-outline-dark">
+                      <input type="radio" name="options" value="buyer" id="buyer" autocomplete="off" checked> Buyer
+                      {% endif %}
+
+                    </label>
+                  </div>
+              </div>
+              <hr>
+
+          <button type="button" class="btn btn-primary">Cancel</button>
+          <button type="submit"  class="btn btn-primary">Submit</button>
+          </form>
+        <!-- Comments Form -->
+        <div class="card my-4">
+
+        </div>
+
+
+      </div>
+<!-- Sidebar Widgets Column -->
+
+    </div>
+
+      <!-- Sidebar Widgets Column -->
+    <!-- /.row -->
+
+  </div>
+  <!-- /.container -->
+  <footer class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright &copy; Your Website 2019</p>
+    </div>
+    <!-- /.container -->
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'js/image_upload.js' %}"></script>
+</body>
+
+</html>
