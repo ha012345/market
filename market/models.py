@@ -28,6 +28,8 @@ class Product(models.Model):
 class Wish(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)  # 위시리스트 해놓은 사람 정보
     product = models.ForeignKey(Product, on_delete=models.CASCADE)  # 위시리스트 한 상품
+    def __str__(self):
+        return self.user.username
 
 
 class History(models.Model):
@@ -35,3 +37,5 @@ class History(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)  # 거래 한 상품
     price = models.IntegerField(default=0)  # 거래 한 가격 또는 auction bid
     status = models.CharField(max_length=20)  # 거래가 성공해서 샀는지, 진행중인지 실패했는지 등
+    def __str__(self):
+        return self.user.username + ' : ' +str(self.price) + '원'

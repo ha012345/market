@@ -43,8 +43,8 @@
           <li class="nav-item">
             <a class="nav-link" href="">menu3</a>
           </li>
-            <li class="nav-item">
-            <a class="nav-link" href="">menu4</a>
+          <li class="nav-item">
+            <a class="nav-link" href="/logout">Log out</a>
           </li>
         </ul>
       </div>
@@ -100,9 +100,9 @@
                 </form>
             </td>
             <td data-label="Price" width=10%>{{ board.price }}</td>
-            <td data-label="Wish" width=20%>{{ board.view }}</td>
+            <td data-label="Wish" width=20%>{% for wish in board.wish_set.all %} {{ wish }}<br> {% endfor%}</td>
             <td data-label="Status" width=15%>{{ board.status }}</td>
-            <td data-label="History" width=25%>{{ board.view }}</td>
+            <td data-label="History" width=25%>{% for histroy in board.history_set.all %} {{ histroy }}<br> {% endfor%}</td>
 
         </tr>
         {% endfor %}

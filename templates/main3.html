@@ -43,8 +43,8 @@
           <li class="nav-item">
             <a class="nav-link" href="">menu3</a>
           </li>
-            <li class="nav-item">
-            <a class="nav-link" href="">menu4</a>
+          <li class="nav-item">
+            <a class="nav-link" href="/logout">Log out</a>
           </li>
         </ul>
       </div>
@@ -93,11 +93,7 @@
         <tr>
 
             <td data-label="StudentID" width=25%>{{ board.info.student_id }}</td>
-            <td data-label="Name" width=20%>
-                <form action="{% url 'main3' %}member={{ board.id }}" method="POST" title="{{ board.username}}">
-                    <a href="{% url 'main3' %}member={{ board.id }}" value="{{ board.id }}">{{ board.username }}</a>
-                </form>
-            </td>
+            <td data-label="Name" width=20%>{{ board.username }}</td>
             <td data-label="Password" width=20%>{{ board.info.pw }}</td>
             <td data-label="Classification" width=10%>{{ board.type.type }}</td>
         <td data-label="Mod/Del" width=25%>
